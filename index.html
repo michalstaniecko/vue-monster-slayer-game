@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
+    <script src="dist/js/app.js" defer></script>
+</head>
+<body>
+<header>
+    <h1>Monster Slayer</h1>
+</header>
+<div id="game">
+    <section id="monster" class="container">
+        <h2>Monster Health</h2>
+        <div class="healthbar">
+            <div class="healthbar__value" :style="monsterBarStyles"></div>
+        </div>
+    </section>
+    <section id="player" class="container">
+        <h2>Your Health</h2>
+        <div class="healthbar">
+            <div class="healthbar__value" :style="playerBarStyles"></div>
+        </div>
+    </section>
+    <section class="container" v-if="winner">
+        <h2>Game Over!</h2>
+        <h3 v-if="winner === 'monster'">You lost!</h3>
+        <h3 v-if="winner === 'player'">You won!</h3>
+        <h3 v-if="winner === 'draw'">It's a draw!</h3>
+        <button @click.prevent="startGame">Start new game</button>
+    </section>
+    <section id="controls" v-else>
+        <button @click.prevent="attackMonster">ATTACK</button>
+        <button :disabled="mayUseSpecialAttack" @click.prevent="specialAttackMonster">SPECIAL ATTACK</button>
+        <button @click.prevent="healPlayer">HEAL</button>
+        <button @click.prevent="surrender">SURRENDER</button>
+    </section>
+    <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul>
+            <li v-for="logMessage in logMessages">
+                <span :class="{'log--player': logMessage.actionBy === 'player', 'log--monster': logMessage.actionBy === 'monster'}">{{ logMessage.actionBy === 'player' ? 'Player' : 'Monster' }}</span>
+                <span v-if="logMessage.actionType === 'heal'"> heals himself for <span
+                            class="log--heal"
+                    >{{ logMessage.actionValue }}</span></span>
+                <span v-else> attacks and deals <span class="log--damage">{{ logMessage.actionValue }}</span></span>
+            </li>
+        </ul>
+    </section>
+</div>
+</body>
+</html>

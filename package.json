@@ -1,0 +1,18 @@
+{
+  "name": "monster-slayer-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "laravel-mix": "^6.0.49",
+    "vue-loader": "^16.8.3"
+  },
+  "dependencies": {
+    "vue": "^3.3.4"
+  }
+}
